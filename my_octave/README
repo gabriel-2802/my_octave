@@ -1,0 +1,78 @@
+//copyright Carauleanu Valentin Gabriel 311CA
+
+Lucrand cu un numar mare de functii, am luat decizia
+de a crea 4 biblioteci statice: 
+	-> dynamic_alloc.h , formata de functii de alocare
+dinamica, realocare si eliberare de memorie
+	-> numeric_functions.h , formata din functii care
+vizeaza operatiile pe matrice si funcii de "swap" 
+	-> commands.h, formata din functii care vizeaza
+operatiile principale ale programului my_octave
+si utilizeaza functiile din celelalte 2 biblioteci. 
+	-> strassen.h, formata din toate functiile necesare
+algoritmului lui strassen de inmultire a 2 matrice
+
+Avand in vedere necesitatea de a retine atat un numar nedefinit de
+matrice, cat si marimile acestora vor fi folositi 3 vectori "resizable"
+alocati dinamic (2 de tipul *v pentru numarul de linii si coloane si
+unul de tipul ***v pentru matrice). In plus, operatiile programului vor
+fi realizate intr-o buclă while(1) din care se va iesi doar daca este
+cititt caracterul 'Q'.
+
+Pentru realizarea tuturor operatiilor vom folosi o instructiune switch
+care va testa valorile variabilei command in care subt memorate caracterele
+introduse de la tastatura.
+
+Vectorii de matrice si de coloane / linii sunt initalizati cu
+dimeniunea 1, urmand ca lungimea acestora sa fie incrementata la adaugarea
+fiecarei noi matrice cu exceptia celei intiale. Astfel, lungimea vectorilor
+ramane minima pe parcursul programului. 
+
+Pentru operatia de crop vom memora liniile si coloane necesare in 2 vectori
+diferiti. De asemenea, vom utiliza o matrice auxiliara pe care o cream
+utilizand cei 2 vectori de redimensionare si matricea initiala. Ulterior,
+eliberam din memorie vechea matrice, o inlocuim cu matricea auxiliara si
+modificam valoarea vectorilor de linii / coloane. 
+
+In cazul operatiei de inmultire, daca cele 2 matrice pot fi inmultite vom
+incrementa lungimea vectorilor de matrice si de dimensiuni, iar matricea
+rezultata(in urma unui algoritm clasic de inmultire O(n^3)) va fi adaugata
+la finalul sirului. 
+
+Pentru operatia de sortare, vom crea un vector in care memoram suma
+elementelor fiecarei matrice. Ulterior, folosind algoritmul de sortare
+prin selectie aplicat pe vectorul de sume, vom modifica si vectorul
+de matrice, alaturi de vectorii de dimensiuni. 
+
+In cadrul operatiei de transpunere vom crea transpusa matricei intr-o
+matrice auxiliara. Utilizarea acesteia permite eliberarea ulterioara
+a memoriei matricei initiale si inlocuirea acestia cu noua matrice. 
+
+Pentru operatia de ridicare la putere, este folsit un algoritm iterativ,
+matricea unitate In. Daca puterea este para, matricea se inmulteste cu ea
+insasi, iar puterea se injumatateste. Daca puterea este impara, 
+matricea In se inmulteste cu matricea ridicata la putere, iar puterea
+este decrementata.
+
+In cadrul operatiei de stergere, matricea 'i' este eliberata din memorie
+si operatia de swap este aplicata pe toate elementele vectorilor de
+matrice si de dimensiuni de la pozitia i pana la pozitia maxima.
+Astfel, matricea stearsa ajunge la finalul vectorului de matrice.
+Ulterior, lungimile vectorilor de dimensiuni si de matrice sunt decrementate
+pentru a utiliza minimul de memorie. 
+
+Daca este citit de la tastatura caracterul 'Q', variabila 'end' devine 1,
+ceea ce duce la iesirea din bucla while(1) si eliberarea completa a
+memoriei utilizate.
+
+Nu in ultimul rand, la fiecare functie ce foloseste alocarea dinamica, vom
+testa daca alocarea / realocarea a avut succes. In cazul unui posibil esec
+vom elibera intreaga memorie utlizata si vom inchide programul.
+
+Pentru operatia S, vom urma instructiunile alg lui Strassen. Functiile de
+split si join sunt similare: split va copia din matricea initiala de
+dim n * n o zona de dim n / 2 * n / 2, incepand cu elementul de pe pozitia
+istart si jstart, iar join va scrie intr- matrice de dim n * n elementele
+unei matrice de dim n / 2 * n / 2, scrierea incepand de pe poziti istart si
+jstart. Ulterior, vom forma matricele m si c, utilizand 2 matrice auxiliare
+pentru a putea elibera memoria alocata in functiile de aditie si de subtractie
