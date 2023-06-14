@@ -1,5 +1,7 @@
 # MY_OCTAVE - Copyright Carauleanu Valentin Gabriel 311CA
 
+My second progamming homework.
+
 Working with a large number of functions, I decided to create 4 static libraries: 
 - `dynamic_alloc.h`, composed of dynamic allocation, reallocation, and memory release functions
 - `numeric_functions.h`, composed of functions that target matrix operations and "swap" functions
